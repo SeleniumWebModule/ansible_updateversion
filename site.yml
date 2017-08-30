@@ -1,0 +1,6 @@
+---
+#playbook para startar a atualização nos servidores de teste e de produção
+
+hosts: all
+
+  roles: jenkins
