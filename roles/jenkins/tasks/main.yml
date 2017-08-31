@@ -4,17 +4,11 @@
 - name: Criação de pasta para o(s) artefato(s)
   file: path=/tmp/jobs/{{job}}
 
-- name: download do artefato ADM
+- name: download de artefatos
   get_url:
-    url: http://{{address}}:{{port}}/job/{{system_adm}}/{{job}}/artifact/dist/ventaboletosadmOuroPrata.war
-    dest: /tmp/jobs/{{job}}/ventaboletosadm.war
-
--name: download do artefato para a Venda
-  get_url:
-    url: http://{{address}}:{{port}}/job/{{system_venta}}/{{job}}/artifact/dist/VentaBoletosServidorOuroPrata.war
-    dest: /tmp/jobs/{{job}}/VentaBoletosServidor.war
-
--name: download do artefato para o cliente da Venda
-  get_url:
-    url: http://{{address}}:{{port}}/job/{{system_venta_client}}/{{job}}/artifact/dist/SCO_OuroPrata.jar.pack.gz
-    dest: /tmp/jobs/{{job}}/SCO.jar.pack.gz
+    url: http://{{address}}:{{port}}/job/{{system_adm}}/{{job}}/artifact/dist/{{item}}
+    dest: /tmp/jobs/{{job}}/{{item}}
+      with_items:
+        - ventaboletosadm{{hostname}}.war
+        - VentaBoletos{{hostname}}Prata.war
+        - SCO_{{hostname}}.jar.pack.gz
