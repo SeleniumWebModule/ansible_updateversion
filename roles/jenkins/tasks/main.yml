@@ -1,14 +1,21 @@
 ---
 # tasks file for jenkins
 
-- name: Criação de pasta para o(s) artefato(s)
-  file: path=/tmp/jobs/{{job}}
+- name: Criação de estrutura para os artefatos
+  file: path=/tmp/jobs/{{ item }} state=directory
+  with_items:
+    - "{{ job_adm }}"
+    - "{{ job_venta }}"
+    - "{{ job_client }}"
 
 - name: download de artefatos
   get_url:
-    url: http://{{address}}:{{port}}/job/{{system_adm}}/{{job}}/artifact/dist/{{item}}
-    dest: /tmp/jobs/{{job}}/{{item}}
-      with_items:
-        - ventaboletosadm{{hostname}}.war
-        - VentaBoletos{{hostname}}Prata.war
-        - SCO_{{hostname}}.jar.pack.gz
+    url: "http://{{ system_address }}:{{ system_port }}/job/{{ item.systempath }}/{{ item.job }}/artifact/dist/{{ item.artefact }}"
+    dest: "/tmp/jobs/{{ item.job }}/{{ item.artefact }}"
+    force_basic_auth: yes
+    url_username: "{{ jenkins_user }}"
+    url_password: "{{ jenkins_pass }}"
+  with_items:
+    - { artefact: 'ventaboletosadm{{ inventory_hostname }}.war', job: '{{ job_adm }}', systempath: '{{ systempath_adm }}' }
+    - { artefact: 'VentaBoletosServidor{{ inventory_hostname }}.war', job: '{{ job_venta }}', systempath: '{{ systempath_venta }}' }
+    - { artefact: 'SCO_{{ inventory_hostname }}.jar.pack.gz', job: '{{ job_client }}', systempath: '{{ systempath_venta_client }}'}
