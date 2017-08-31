@@ -1,2 +1,7 @@
+[all:vars]
+ansible_connection=ssh
+ansible_ssh_user=root
+ansible_ssh_pass=puppet
+
 [clientes]
-OuroPrata ansible_host=192.168.0.95 ansible_port=2222
+OuroPrata ansible_host=192.168.0.126
