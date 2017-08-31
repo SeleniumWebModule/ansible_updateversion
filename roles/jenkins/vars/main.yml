@@ -1,7 +1,7 @@
 ---
 # vars file for jenkins - será gerado pela interface web (projeto rjwebcontrol)
 
-address: 192.168.0.164
+address: 189.3.216.130
 port: 1313
 job: 2142
 system_adm: SCO%20-%20ADM
