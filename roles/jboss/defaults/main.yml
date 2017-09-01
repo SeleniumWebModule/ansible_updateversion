@@ -2,16 +2,18 @@
 # defaults file for jboss
 jboss:
   path: /dados/jboss
-  artefact:
-    system:
-      adm:
-        path: sco_adm
+  system:
+    adm:
+      path: sco_adm
+      artefact: 
         job: 2142
-        service: jbossAdm
-      venta:
-        path: sco_vta
+      service: jbossAdm
+    venta:
+      path: sco_vta
+      artefact:
         job: 2050
-        service: jbossVta
-      client:
-        path: webstart.war/sco2
+      service: jbossVta
+    client:
+      path: webstart.war/sco2
+      artefact:
         job: 2422
