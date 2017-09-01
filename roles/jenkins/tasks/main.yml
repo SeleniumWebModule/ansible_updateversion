@@ -4,18 +4,33 @@
 - name: Criação de estrutura para os artefatos
   file: path=/tmp/jobs/{{ item }} state=directory
   with_items:
-    - "{{ job_adm }}"
-    - "{{ job_venta }}"
-    - "{{ job_client }}"
+    - "{{ jenkins.systems.adm.job }}"
+    - "{{ jenkins.systems.venta.job }}"
+    - "{{ jenkins.systems.client.job }}"
 
 - name: download de artefatos
   get_url:
-    url: "http://{{ system_address }}:{{ system_port }}/job/{{ item.systempath }}/{{ item.job }}/artifact/dist/{{ item.artefact }}"
-    dest: "/tmp/jobs/{{ item.job }}/{{ item.artefact }}"
+    url: "http://{{ jenkins.address }}:{{ jenkins.port }}/job/{{ item.systempath }}/{{ item.job }}/artifact/dist/{{ item.artefact }}"
+    dest: "/tmp/jobs/{{ item.job }}/{{ item.artefact_finalname }}"
     force_basic_auth: yes
-    url_username: "{{ jenkins_user }}"
-    url_password: "{{ jenkins_pass }}"
+    url_username: "{{ jenkins.user }}"
+    url_password: "{{ jenkins.pass }}"
   with_items:
-    - { artefact: 'ventaboletosadm{{ inventory_hostname }}.war', job: '{{ job_adm }}', systempath: '{{ systempath_adm }}' }
-    - { artefact: 'VentaBoletosServidor{{ inventory_hostname }}.war', job: '{{ job_venta }}', systempath: '{{ systempath_venta }}' }
-    - { artefact: 'SCO_{{ inventory_hostname }}.jar.pack.gz', job: '{{ job_client }}', systempath: '{{ systempath_venta_client }}'}
+    - { 
+        artefact: 'ventaboletosadm{{ inventory_hostname }}.war', 
+        job: '{{ jenkins.systems.adm.job }}',
+        systempath: '{{ jenkins.systems.adm.path }}', 
+        artefact_finalname: ventaboletosadm.war
+      }
+    - { 
+        artefact: 'VentaBoletosServidor{{ inventory_hostname }}.war', 
+        job: '{{ jenkins.systems.venta.job }}', 
+        systempath: '{{ jenkins.systems.venta.path }}',
+        artefact_finalname: VentaBoletosServidor.war 
+      }
+    - { 
+        artefact: 'SCO_{{ inventory_hostname }}.jar.pack.gz', 
+        job: '{{ jenkins.systems.client.job }}', 
+        systempath: '{{ jenkins.systems.client.path }}',
+        artefact_finalname: SCO.jar.pack.gz  
+      }
