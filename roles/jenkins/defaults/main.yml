@@ -1,2 +1,12 @@
 ---
 # defaults file for jenkins
+system_address: 189.3.216.130
+system_port: 1313
+job_adm: 2142
+job_venta: 2050
+job_client: 2422
+systempath_adm: SCO%20-%20ADM
+systempath_venta: SCO%20-%20VentaBoletosServidor
+systempath_venta_client: SCO%20-%20VentaBoletosCliente
+jenkins_user: eduardo.dicarde
+jenkins_pass: ABC123abc
