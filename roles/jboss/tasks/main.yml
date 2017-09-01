@@ -1,2 +1,4 @@
 ---
 # tasks file for jboss
+- name: Exclusão de backups anteriores
+  file: "{ jboss.path }/servers/{ jboss.system.adm.path }/deploy/*.old" state=absent
