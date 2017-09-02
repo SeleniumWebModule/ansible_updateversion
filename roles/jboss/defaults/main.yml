@@ -1,19 +1,22 @@
 ---
 # defaults file for jboss
 jboss:
-  path: /dados/jboss
+  path: /opt/jboss
   system:
     adm:
-      path: sco_adm
+      path: sco_adm/deploy
       artefact: 
         job: 2142
+        name: ventaboletosadm.war
       service: jbossAdm
     venta:
-      path: sco_vta
+      path: sco_vta/deploy
       artefact:
         job: 2050
+        name: VentaBoletosServidor.war
       service: jbossVta
     client:
-      path: webstart.war/sco2
+      path: sco_adm/deploy/webstart.war/sco2
       artefact:
         job: 2422
+        name: SCO.jar.pack.gz
