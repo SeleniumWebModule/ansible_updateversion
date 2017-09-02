@@ -1,4 +1,22 @@
 ---
 # tasks file for jboss
-- name: Exclusão de backups anteriores
-  file: "{ jboss.path }/servers/{ jboss.system.adm.path }/deploy/*.old" state=absent
+#- debug: 
+#    msg: "Arquivo a ser excluído: {{ jboss.path }}/server/{{ jboss.system.adm.path }}/deploy/ventaboletosadm.war.old" 
+
+- name: Exclusão de backups antigos 
+  file: 
+    state: absent
+    path: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}.old" 
+  with_items: 
+    - { 
+        systempath: '{{ jboss.system.adm.path }}',
+        artefact: '{{ jboss.system.adm.artefact.name }}'  
+      }
+    - { 
+        systempath: '{{ jboss.system.venta.path }}',
+        artefact: '{{ jboss.system.venta.artefact.name }}'  
+      }
+    - {
+        systempath: '{{ jboss.system.client.path }}',
+        artefact: '{{ jboss.system.client.artefact.name }}'  
+      }
