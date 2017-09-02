@@ -1,12 +1,45 @@
 ---
-# tasks file for jboss
-#- debug: 
-#    msg: "Arquivo a ser excluído: {{ jboss.path }}/server/{{ jboss.system.adm.path }}/deploy/ventaboletosadm.war.old" 
-
-- name: Exclusão de backups antigos 
+- name: Exclusão de arquivos .old 
   file: 
     state: absent
     path: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}.old" 
+  with_items: 
+    - { 
+        systempath: '{{ jboss.system.adm.path }}',
+        artefact: '{{ jboss.system.adm.artefact.name }}'  
+      }
+    - { 
+        systempath: '{{ jboss.system.venta.path }}',
+        artefact: '{{ jboss.system.venta.artefact.name }}'  
+      }
+    - {
+        systempath: '{{ jboss.system.client.path }}',
+        artefact: '{{ jboss.system.client.artefact.name }}'  
+      }
+
+- name: Geração de backup para a versão atual
+  copy:
+    remote_src: True
+    src: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}"
+    dest: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}.old"
+  with_items: 
+    - { 
+        systempath: '{{ jboss.system.adm.path }}',
+        artefact: '{{ jboss.system.adm.artefact.name }}'  
+      }
+    - { 
+        systempath: '{{ jboss.system.venta.path }}',
+        artefact: '{{ jboss.system.venta.artefact.name }}'  
+      }
+    - {
+        systempath: '{{ jboss.system.client.path }}',
+        artefact: '{{ jboss.system.client.artefact.name }}'  
+      }  
+
+- name: Exclusão da versão atual
+  file: 
+    state: absent
+    path: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}" 
   with_items: 
     - { 
         systempath: '{{ jboss.system.adm.path }}',
