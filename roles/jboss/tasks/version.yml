@@ -1,0 +1,10 @@
+---
+- name: Copiando nova versão
+  copy:
+    remote_src: True
+    src: "/tmp/jobs/{{ item.job }}/{{ item.artefact }}"
+    dest: "{{ jboss.path }}/server/{{ item.syspath }}/{{ item.artefact }}"
+  with_items: 
+    - { item.job: " {{ "}
+    - item2
+    - item3
