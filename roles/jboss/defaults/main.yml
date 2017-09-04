@@ -20,3 +20,6 @@ jboss:
       artefact:
         job: 2422
         name: SCO.jar.pack.gz
+
+artefact:
+  path: /tmp/jobs
