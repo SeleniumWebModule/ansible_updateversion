@@ -20,19 +20,23 @@
 - name: Geração de backup para a versão atual
   copy:
     remote_src: True
-    src: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}"
+    src: "{{ artefact.path }}/{{ item.job }}/{{ item.artefact }}"
     dest: "{{ jboss.path }}/server/{{ item.systempath }}/{{ item.artefact }}.old"
   with_items: 
     - { 
         systempath: '{{ jboss.system.adm.path }}',
+        job:        '{{ jboss.system.adm.artefact.job }}',
         artefact: '{{ jboss.system.adm.artefact.name }}'  
+
       }
     - { 
         systempath: '{{ jboss.system.venta.path }}',
+        job:        '{{ jboss.system.venta.artefact.job }}',
         artefact: '{{ jboss.system.venta.artefact.name }}'  
       }
     - {
         systempath: '{{ jboss.system.client.path }}',
+        job:        '{{ jboss.system.client.artefact.job }}',
         artefact: '{{ jboss.system.client.artefact.name }}'  
       }  
 
