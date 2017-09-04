@@ -5,6 +5,18 @@
     src: "/tmp/jobs/{{ item.job }}/{{ item.artefact }}"
     dest: "{{ jboss.path }}/server/{{ item.syspath }}/{{ item.artefact }}"
   with_items: 
-    - { item.job: " {{ "}
-    - item2
-    - item3
+    - { 
+        job:      "{{ jboss.system.adm.artefact.job }}",
+        artefact: "{{ jboss.system.adm.artefact.name }}",
+        syspath:  "{{ jboss.system.adm.path }}"
+      }
+    - { 
+        job:      "{{ jboss.system.venta.artefact.job }}",
+        artefact: "{{ jboss.system.venta.artefact.name }}",
+        syspath:  "{{ jboss.system.venta.path }}"
+      }
+    - {
+        job:      "{{ jboss.system.client.artefact.job }}",
+        artefact: "{{ jboss.system.client.artefact.name }}",
+        syspath:  "{{ jboss.system.client.path }}"
+      }
