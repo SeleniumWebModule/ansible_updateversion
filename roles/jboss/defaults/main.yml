@@ -8,13 +8,13 @@ jboss:
       artefact: 
         job: 2142
         name: ventaboletosadm.war
-      service: jbossAdm
+      service: sco_adm
     venta:
       path: sco_vta/deploy
       artefact:
         job: 2050
         name: VentaBoletosServidor.war
-      service: jbossVta
+      service: sco_vta
     client:
       path: sco_adm/deploy/webstart.war/sco2
       artefact:
