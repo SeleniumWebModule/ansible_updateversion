@@ -22,19 +22,11 @@
       }
 
 - name: registrando status dos serviços
-  shell: "ps aux | grep {{ item }}"
-  register: "{{ item }}-status"
-  with_items:
-    - "{{ jboss.system.adm.service }}"
-    - "{{ jboss.system.venta.service }}"
-
-- name: exibindo status para os processos
-  debug: 
-    var: "{{ item }}-status"
-    verbosity: 4
-  with_items:
-    - "{{ jboss.system.adm.service }}"
-    - "{{ jboss.system.venta.service }}"  
-
+  shell: "ps aux | grep {{ item }} | grep -v grep"
+  ignore_errors: yes
+  register: "service_{{ item }}_status"
+  with_items: 
+    - {{ jboss.system.adm.path }}
+    - {{ jboss.system.venta.path }}
 
 
